@@ -25,6 +25,8 @@ router.post('/insertarpaciente', async (req, res) => {
   res.json({ 'RES': 'INSERTADO' });
 });
 
+
+
 router.get('/consultatotalpacientes', async (req, res) => {
 
   const { rows } = await pool.query('SELECT * FROM pacientes');
