@@ -2,8 +2,12 @@ console.log('holaaa');
 
 var formulario = document.getElementById('contact');
 
-formulario.addEventListener('submit', function (e) {
-  e.preventDefault();
+document.getElementById('contact-submit').addEventListener('click',envar);
+document.getElementById('borrar').addEventListener('click',borrar)
+document.getElementById('actu').addEventListener('click',actua)
+
+
+function envar(){
   console.log('me diste un click');
   let datos = new FormData(formulario);
   let nombrepaciente = datos.get('nombre');
@@ -22,18 +26,18 @@ formulario.addEventListener('submit', function (e) {
     }),
   }
 
-
+  console.log('vamos a enviar a la base de datos');
   fetch('/basedatos/insertarpaciente', options)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
     });
-});
+};
 
 /*--------------- borrar ---------------------------*/
-/*
-formulario.addEventListener('submit', function (e) {
-  e.preventDefault();
+
+
+function borrar (){
   let datos = new FormData(formulario);
   let idpaciente = datos.get('identificacion');
 
@@ -53,14 +57,12 @@ formulario.addEventListener('submit', function (e) {
     .then((data) => {
       console.log(data);
     });
-});
+};
 
 
 /*------------------ Actualizar ----------------*/
-/*
 
-formulario.addEventListener('submit', function (e) {
-  e.preventDefault();
+function actua(){
   let datos = new FormData(formulario);
   let nombrepaciente = datos.get('nombre');
   let apellidopaciente = datos.get('apellido');
@@ -86,44 +88,44 @@ formulario.addEventListener('submit', function (e) {
     .then((data) => {
       console.log(data);
     });
-});
+};
 
 
 /*----------------consultar-------------------------*/
 
 
-function genera_filas(x) {
+function genera_filas(datos) {
 
-  var row = document.getElementById("cuerpotabla");
+  var row=document.getElementById("cuerpotabla");
   var filas = "";
-  for (var i = 0; i < x.length; i++) {
-    filas += "<tr>";
-    filas += "<td>" + x[i].id + "</td>";
-    filas += "<td>" + x[i].nombre + "</td>";
-    filas += "<td>" + x[i].apellido + "</td>";
-    filas += "<td>" + x[i].numid + "</td>";
-    filas += "</tr>";
+  for(var i=0;i<datos.length;i++){
+      filas += "<tr>";
+      filas += "<td>" + datos[i].id + "</td>";
+      filas += "<td>" + datos[i].nombre + "</td>";
+      filas += "<td>" + datos[i].apellido + "</td>";
+      filas += "<td>" + datos[i].numid + "</td>";
+      filas += "</tr>";
   }
-  row.innerHTML = filas;
+  row.innerHTML=filas;
 }
 
 
-function cargartabla() {
+function cargartabla(){
 
-  let myHeaders = new Headers();
+let myHeaders = new Headers();
 
-  const options = {
-    method: 'GET',
-    headers: myHeaders,
+const options = {
+  method: 'GET',
+  headers: myHeaders,
 
-  }
+}
 
 
-  fetch('/basedatos/consultatotalpacientes', options)
-    .then((res) => res.json())
-    .then((data) => {
-      genera_filas(data);
-    });
+fetch('/basedatos/consultatotalpacientes', options)
+  .then((res) => res.json())
+  .then((data) => {
+    genera_filas(data);
+  });
 };
 
 window.onload = cargartabla;

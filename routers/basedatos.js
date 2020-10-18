@@ -26,9 +26,27 @@ router.post('/insertarpaciente', async (req, res) => {
 });
 
 
-
 router.get('/consultatotalpacientes', async (req, res) => {
 
-  const { rows } = await pool.query('SELECT * FROM pacientes');
+  const { rows } = await pool.query('SELECT * FROM pacientes ORDER BY id');
   res.json(rows);
+});
+
+
+router.post('/actualizarpaciente', async (req, res) => {
+  const { nombre, apellido, numid, id } = req.body;
+  await pool.query(
+    `UPDATE pacientes SET nombre = '${nombre}', apellido  = '${apellido}', numid = '${numid}'
+    WHERE id ='${id}'`
+  );
+  res.json('ACTUALIZADO');
+});
+
+
+router.delete('/eliminarpacientes', async (req, res) => {
+  const { numid } = req.body;
+  await pool.query(
+    `DELETE FROM pacientes WHERE  numid = '${numid}'`
+  );
+  res.json('ELIMINADO');
 });

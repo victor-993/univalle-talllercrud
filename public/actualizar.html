@@ -14,14 +14,14 @@
 
 <body>
 <div class="menu" id="menu">
+    <button class="btn" onclick="location.href='index.html'" >Insertar</button>
     <button class="btn" onclick="location.href='consulta.html'" >Consultar</button>
-    <button class="btn" onclick="location.href='actualizar.html'" >Actualizar</button>
     <button class="btn" onclick="location.href='borrar.html'" >Borrar</button>
 </div>
   <div class="container">
     <form id="contact" action="" method="post">
       <h3>Taller Base de datos UNIVALLE</h3>
-      <h4>Enviar Pacientes</h4>
+      <h4>Actualizar Pacientes</h4>
       <fieldset>
         <input placeholder="Nombre Paciente" name="nombre" type="text" tabindex="1" required autofocus>
       </fieldset>
@@ -32,13 +32,16 @@
         <input placeholder="Id Paciente" name="identificacion" type="text" tabindex="2" required>
       </fieldset>
       <fieldset>
+        <input placeholder="Identificador" name="id" type="text" tabindex="3" required>
+      </fieldset>
+      <fieldset>
         <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Enviar</button>
       </fieldset>
 
     </form>
   </div>
 
-  <script src="app.js"></script>
+  <script src="actualizar.js"></script>
 </body>
 
 </html>
